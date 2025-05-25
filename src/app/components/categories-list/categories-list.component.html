@@ -1,1 +1,36 @@
-<p>categories-list works!</p>
+<h2 class="titulo-principal">Lista Categorías</h2>
+
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th># ID</th>
+    <th>Categoria</th>
+    <th>Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  @for (category of categories; track category.id) {
+    @if (!isEditing) {
+      <tr>
+        <td>{{ category.id }}</td>
+        <td>{{ category.name | titlecase}}</td>
+        <td>
+          <div class="icon-tooltip-wrapper">
+            <i class="bi bi-pencil-square m-3" ></i>
+            <span class="tooltip-text">Editar</span>
+          </div>
+          <div class="icon-tooltip-wrapper">
+            <i class="bi bi-trash-fill text-danger" ></i>
+            <span class="tooltip-text">Eliminar</span>
+          </div>
+        </td>
+      </tr>
+    } @else {
+      <tr>
+        <td>{{ category.id }}</td>
+        <td>Editando Categoría</td>
+      </tr>
+    }
+  }
+  </tbody>
+</table>
