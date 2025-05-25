@@ -1,1 +1,25 @@
-<p>category-form works!</p>
+<div class="container-formulario">
+  <h2 class="titulo-principal">Agregar Categoria</h2>
+
+  <div class="formulario-producto">
+    <form id="form-producto" [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nombre">Nombre Categoria</label>
+        <input type="text" id="nombre" formControlName="nombre">
+        @if (categoryForm.controls.nombre.invalid && (categoryForm.controls.nombre.touched || categoryForm.controls.nombre.dirty)) {
+          @if (categoryForm.controls.nombre.hasError('required')) {
+            <p id="error-name" class="text-error">Categoría es obligatorio</p>
+          }
+          @if (categoryForm.controls.nombre.hasError('minlength')) {
+            <p id="error-name" class="text-error">Categoría debe tener 3 o más caracteres</p>
+          }
+        }
+      </div>
+
+      <div class="form-buttons">
+        <button type="submit" id="btn-guardar" [disabled]="categoryForm.invalid">Guardar</button>
+        <button type="button" id="btn-cancelar" (click)="reset()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
