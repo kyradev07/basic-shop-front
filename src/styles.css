@@ -5,6 +5,7 @@
   --clr-white: #ececec;
   --clr-gray: #e2e2e2;
   --clr-red: #bd1f1f;
+  --clr-error: rgba(244, 5, 5, 0.67)
 }
 
 * {
@@ -374,6 +375,13 @@ main {
 .form-buttons {
   text-align: right;
   margin-top: 20px;
+}
+
+.text-error {
+  color: var(--clr-error);
+  margin-top: 0.5rem;
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 
 
