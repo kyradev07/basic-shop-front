@@ -17,7 +17,9 @@
       </div>
 
       <div class="form-buttons">
-        <button type="submit" id="btn-guardar" [disabled]="categoryForm.invalid">Guardar</button>
+        <button type="submit" id="btn-guardar" [ngStyle]="{'background-color': categoryForm.invalid ? 'var(--clr-gray)' : '#5cb85c'}"
+                [disabled]="categoryForm.invalid">Guardar
+        </button>
         <button type="button" id="btn-cancelar" (click)="reset()">Cancelar</button>
       </div>
     </form>

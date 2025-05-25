@@ -3,11 +3,13 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CategoryService } from '../../services/category/category.service';
 import { Category } from '../../models/category.interface';
 import { NotificationService } from '../../services/util/notification.service';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-category-form',
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgStyle
   ],
   templateUrl: './category-form.component.html',
   styleUrl: './category-form.component.css'
@@ -32,7 +34,7 @@ export class CategoryFormComponent {
         this.notificationService.notificationSuccess(`Categoría '${category.name}' creada exitosamente`);
         this.reset();
       },
-      error: (error) => this.notificationService.notificationError(error.error.message),
+      error: (error) => this.notificationService.notificationError(error.error.message ?? error.message),
     });
   }
 
