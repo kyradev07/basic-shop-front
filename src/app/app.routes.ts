@@ -30,5 +30,10 @@ export const routes: Routes = [
   {
     path: 'users/add',
     component: UserFormComponent
-  }
+  },
+  {
+    path: '**',
+    redirectTo: 'products',
+    pathMatch: 'full',
+  },
 ];
