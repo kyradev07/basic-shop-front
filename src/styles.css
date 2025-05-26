@@ -384,7 +384,7 @@ main {
   color: var(--clr-error);
   margin-top: 0.5rem;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
 }
 
 
@@ -426,7 +426,10 @@ main {
   opacity: 1;
 }
 
-
+.boton-table {
+  background-color: transparent;
+  border: 0;
+}
 
 
 

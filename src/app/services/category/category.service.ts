@@ -19,4 +19,12 @@ export class CategoryService {
   findAll(): Observable<Category[]> {
     return this.http.get<Category[]>(this.url);
   }
+
+  deleteById(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.url}/${id}`);
+  }
+
+  updateCategory(id: number, category: Category): Observable<Category> {
+    return this.http.patch<Category>(`${this.url}/${id}`, category);
+  }
 }

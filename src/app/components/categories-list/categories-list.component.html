@@ -1,36 +1,68 @@
 <h2 class="titulo-principal">Lista Categorías</h2>
 
-<table class="table table-bordered">
-  <thead>
-  <tr>
-    <th># ID</th>
-    <th>Categoria</th>
-    <th>Acciones</th>
-  </tr>
-  </thead>
-  <tbody>
-  @for (category of categories; track category.id) {
-    @if (!isEditing) {
+<div class="container-formulario">
+
+  @if (!categories.length) {
+    <h4 class="titulo-principal">Lista Vacía...</h4>
+
+  } @else {
+
+    <table class="table table-bordered">
+      <thead>
       <tr>
-        <td>{{ category.id }}</td>
-        <td>{{ category.name | titlecase}}</td>
-        <td>
-          <div class="icon-tooltip-wrapper">
-            <i class="bi bi-pencil-square m-3" ></i>
-            <span class="tooltip-text">Editar</span>
-          </div>
-          <div class="icon-tooltip-wrapper">
-            <i class="bi bi-trash-fill text-danger" ></i>
-            <span class="tooltip-text">Eliminar</span>
-          </div>
-        </td>
+        <th># ID</th>
+        <th>Categoria</th>
+        <th>Acciones</th>
       </tr>
-    } @else {
-      <tr>
-        <td>{{ category.id }}</td>
-        <td>Editando Categoría</td>
-      </tr>
-    }
+      </thead>
+      <tbody>
+        @for (category of categories; track category.id; let index = $index) {
+          @if (isEditing[index]) {
+            <tr>
+              <td>{{ category.id }}</td>
+              <td>
+                <input type="text" id="nombre" [formControl]="formControls[index]">
+                @if (formControls[index].invalid && (formControls[index].touched || formControls[index].dirty)) {
+                  @if (formControls[index].hasError('required')) {
+                    <p id="error-name" class="text-error">Categoría es obligatorio</p>
+                  }
+                  @if (formControls[index].hasError('minlength')) {
+                    <p id="error-name" class="text-error">Categoría debe tener 3 o más caracteres</p>
+                  }
+                }
+              </td>
+              <td>
+                <div class="icon-tooltip-wrapper">
+                  <button class="boton-table" [disabled]="formControls[index].invalid" (click)="save(index)"><i
+                    class="bi bi-floppy m-3"></i></button>
+                  <span class="tooltip-text">Guardar</span>
+                </div>
+                <div class="icon-tooltip-wrapper">
+                  <i class="bi bi-x-circle-fill text-danger" (click)="cancel(index)"></i>
+                  <span class="tooltip-text">Cancelar</span>
+                </div>
+              </td>
+            </tr>
+          } @else {
+            <tr>
+              <td>{{ category.id }}</td>
+              <td>{{ category.name | titlecase }}</td>
+              <td>
+                <div class="icon-tooltip-wrapper">
+                  <i class="bi bi-pencil-square m-3" style="color: blue" (click)="edit(index)"></i>
+                  <span class="tooltip-text">Editar</span>
+                </div>
+                <div class="icon-tooltip-wrapper">
+                  <i class="bi bi-trash-fill text-danger" (click)="delete(category)"></i>
+                  <span class="tooltip-text">Eliminar</span>
+                </div>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+
   }
-  </tbody>
-</table>
+
+</div>
