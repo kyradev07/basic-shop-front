@@ -2,35 +2,72 @@
   <h2 class="titulo-principal">Agregar Producto</h2>
 
   <div class="formulario-producto">
-    <form id="form-producto">
+    <form id="form-producto" [formGroup]="productForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <label for="nombre">Nombre Producto</label>
-        <input type="text" id="nombre" required>
+        <label for="nombre">Producto</label>
+        <input type="text" id="nombre" formControlName="nombre">
+        @if (productForm.controls.nombre.invalid && (productForm.controls.nombre.touched || productForm.controls.nombre.dirty)) {
+          @if (productForm.controls.nombre.hasError('required')) {
+            <p id="error-name" class="text-error">Producto es obligatorio</p>
+          }
+          @if (productForm.controls.nombre.hasError('minlength')) {
+            <p id="error-name" class="text-error">Producto debe tener 2 o más caracteres</p>
+          }
+        }
       </div>
 
       <div class="form-group">
         <label for="descripcion">Descripción</label>
-        <textarea id="descripcion" rows="3" required></textarea>
+        <textarea id="descripcion" rows="3" formControlName="descripcion"></textarea>
+        @if (productForm.controls.descripcion.invalid && (productForm.controls.descripcion.touched || productForm.controls.descripcion.dirty)) {
+          @if (productForm.controls.descripcion.hasError('required')) {
+            <p id="error-name" class="text-error">Descripción es obligatorio</p>
+          }
+          @if (productForm.controls.descripcion.hasError('minlength')) {
+            <p id="error-name" class="text-error">Descripción debe tener 2 o más caracteres</p>
+          }
+        }
       </div>
 
       <div class="form-group">
         <label for="precio">Precio</label>
-        <input type="number" id="precio" min="0" step="0.01" required>
+        <input type="number" id="precio" step="0.01" formControlName="precio">
+        @if (productForm.controls.precio.invalid && (productForm.controls.precio.touched || productForm.controls.precio.dirty)) {
+          @if (productForm.controls.precio.hasError('required')) {
+            <p id="error-name" class="text-error">Precio es obligatorio</p>
+          }
+          @if (productForm.controls.precio.hasError('min')) {
+            <p id="error-name" class="text-error">Precio debe ser mayor o igual que $1</p>
+          }
+        }
       </div>
 
       <div class="form-group">
         <label for="categoria">Categoría</label>
-        <select id="categoria" required>
+        <select id="categoria" formControlName="categoria">
           <option value="" disabled selected>Seleccione Categoria</option>
-          <option value="1" name="tecnologia">Tecnologia</option>
-          <option value="2" name="arte">Arte</option>
-          <option value="3" name="mascota">Mascota</option>
+          @for (category of categorias$ | async; track category.id) {
+            <option [value]="category.id">{{ category.name }}</option>
+          }
         </select>
+        @if (productForm.controls.categoria.invalid && (productForm.controls.categoria.touched || productForm.controls.categoria.dirty)) {
+          @if (productForm.controls.categoria.hasError('required')) {
+            <p id="error-name" class="text-error">Categoría es obligatoria</p>
+          }
+        }
       </div>
 
       <div class="form-group">
         <label for="stock">Stock</label>
-        <input type="number" id="stock" min="1" required>
+        <input type="number" id="stock" formControlName="stock">
+        @if (productForm.controls.stock.invalid && (productForm.controls.stock.touched || productForm.controls.stock.dirty)) {
+          @if (productForm.controls.stock.hasError('required')) {
+            <p id="error-name" class="text-error">Stock es obligatorio</p>
+          }
+          @if (productForm.controls.stock.hasError('min')) {
+            <p id="error-name" class="text-error">Stock debe ser mayor o igual que 0</p>
+          }
+        }
       </div>
 
       <div class="form-group">
@@ -40,8 +77,11 @@
       </div>
 
       <div class="form-buttons">
-        <button type="submit" id="btn-guardar">Guardar</button>
-        <button type="button" id="btn-cancelar" >Cancelar</button>
+        <button type="submit" id="btn-guardar"
+                [ngStyle]="{'background-color': productForm.invalid ? 'var(--clr-gray)' : '#5cb85c'}"
+                [disabled]="productForm.invalid">Guardar
+        </button>
+        <button type="button" id="btn-cancelar" (click)="reset()">Cancelar</button>
       </div>
     </form>
   </div>
