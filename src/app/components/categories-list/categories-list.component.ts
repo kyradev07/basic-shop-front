@@ -33,9 +33,12 @@ export class CategoriesListComponent implements OnInit {
   }
 
   private findAll() {
+    this.isEditing = [];
+    this.formControls = [];
+    this.categories = [];
     this.categoryService.findAll().subscribe({
       next: (categories) => {
-        this.categories = categories;
+        this.categories = [...categories];
         this.createForm();
       },
       error: (error) => this.notificationService.notificationError(error.error.message ?? error.message),
