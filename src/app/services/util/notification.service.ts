@@ -8,9 +8,9 @@ export class NotificationService {
 
   notificationSuccess(message: string): void {
     Swal.fire({
+      icon: "success",
       title: "¡OK!",
-      text: message,
-      icon: "success"
+      text: message
     });
   }
 
@@ -18,6 +18,14 @@ export class NotificationService {
     Swal.fire({
       icon: "error",
       title: "Oops...",
+      text: message,
+    });
+  }
+
+  notificationWarning(message: string): void {
+    Swal.fire({
+      icon: "warning",
+      title: "!Attention!",
       text: message,
     });
   }
