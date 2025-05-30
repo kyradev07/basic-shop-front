@@ -46,7 +46,7 @@
         <label for="categoria">Categoría</label>
         <select id="categoria" formControlName="categoria">
           <option value="" disabled selected>Seleccione Categoria</option>
-          @for (category of categorias$ | async; track category.id) {
+          @for (category of categories$ | async; track category.id) {
             <option [value]="category.id">{{ category.name }}</option>
           }
         </select>
@@ -72,8 +72,15 @@
 
       <div class="form-group">
         <label for="imagen">Imágenes del Producto</label>
-        <input type="file" id="imagen" multiple required>
-        <div id="preview-imagen"></div>
+        <input type="file" id="imagen" multiple (change)="onFileChange($event)" accept="image/*" formControlName="images">
+        <div id="preview-imagen">
+          <img src="{{imagesBase64[0]}}" alt="">
+        </div>
+        @if ((productForm.controls.images.touched || productForm.controls.images.dirty)) {
+          @if (productForm.controls.images.hasError('required')) {
+            <p id="error-name" class="text-error">Imágenes es obligatorio</p>
+          }
+        }
       </div>
 
       <div class="form-buttons">
