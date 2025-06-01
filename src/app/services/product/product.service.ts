@@ -17,4 +17,11 @@ export class ProductService {
     return this.http.post<Product>(this.url, product);
   }
 
+  findAll(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.url);
+  }
+
+  deleteById(id: number): Observable<Product> {
+    return this.http.delete<Product>(`${this.url}/${id}`);
+  }
 }
