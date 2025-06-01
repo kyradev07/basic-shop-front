@@ -29,4 +29,16 @@ export class NotificationService {
       text: message,
     });
   }
+
+  notificationDelete(message: string) {
+    return Swal.fire({
+      title: `¿Está seguro de eliminar ${message}?`,
+      text: "¡No puedes revertir la acción!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "¡Sí, eliminar!"
+    })
+  }
 }

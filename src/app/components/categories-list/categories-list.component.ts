@@ -4,7 +4,6 @@ import { Category } from '../../models/category.interface';
 import { NotificationService } from '../../services/util/notification.service';
 import { TitleCasePipe } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-categories-list',
@@ -82,25 +81,17 @@ export class CategoriesListComponent implements OnInit {
   }
 
   delete(category: Category) {
-    Swal.fire({
-      title: "¿Está seguro de eliminar este categoría?",
-      text: "¡No puedes revertir la acción!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Si, eliminar!"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.categoryService.deleteById(category.id || 0).subscribe({
-          next: () => {
-            this.findAll();
-            this.notificationService.notificationSuccess(`Categoría ${category.name} eliminada exitosamente`)
-          },
-          error: (error) => this.notificationService.notificationError(error.error.message ?? error.message),
-        })
-      }
-    });
-
+    this.notificationService.notificationDelete("esta categoría")
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.categoryService.deleteById(category.id || 0).subscribe({
+            next: () => {
+              this.findAll();
+              this.notificationService.notificationSuccess(`Categoría ${category.name} eliminada exitosamente`)
+            },
+            error: (error) => this.notificationService.notificationError(error.error.message ?? error.message),
+          })
+        }
+      });
   }
 }
