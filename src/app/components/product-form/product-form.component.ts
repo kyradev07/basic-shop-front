@@ -7,13 +7,15 @@ import { catchError, Observable, of } from 'rxjs';
 import { AsyncPipe, NgStyle } from '@angular/common';
 import { Product } from '../../models/product.interface';
 import { ProductService } from '../../services/product/product.service';
+import { CarouselComponent } from '../carousel/carousel.component';
 
 @Component({
   selector: 'app-product-form',
   imports: [
     ReactiveFormsModule,
     AsyncPipe,
-    NgStyle
+    NgStyle,
+    CarouselComponent
   ],
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.css'
@@ -47,11 +49,6 @@ export class ProductFormComponent {
   }
 
   onSubmit() {
-    if (this.imagesBase64.length > 5) {
-      this.notificationService.notificationWarning(`No puede seleccionar más de 5 fotos`);
-      return;
-    }
-
     const product: Product = {
       name: this.productForm.controls.nombre.value,
       description: this.productForm.controls.descripcion.value,
@@ -77,19 +74,19 @@ export class ProductFormComponent {
 
   onFileChange(event: Event) {
     this.imagesBase64 = [];
-    const input = event.target as HTMLInputElement;
+    let input: HTMLInputElement | null = event.target as HTMLInputElement;
 
     if (!input.files || input.files.length === 0) {
       return;
     }
 
-    Array.from(input.files).forEach((file: File) => {
-      const maxSizeKB = 200;
-      if (file.size / 1024 > maxSizeKB) {
-        this.notificationService.notificationWarning(`La imagen ${file.name} excede el límite de ${maxSizeKB}KB`);
-        return;
-      }
+    if (input.files.length > 5) {
+      this.productForm.controls.images.reset();
+      this.notificationService.notificationWarning(`No puede seleccionar más de 5 fotos`);
+      return;
+    }
 
+    Array.from(input.files).forEach((file: File) => {
       const reader: FileReader = new FileReader();
 
       reader.onload = (e: ProgressEvent<FileReader>) => {
