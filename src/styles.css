@@ -431,6 +431,10 @@ main {
   border: 0;
 }
 
+.boton-table:hover {
+  transform: scale(1.5);
+}
+
 .grid-form {
   display: grid;
   grid-template-columns: 1fr 1fr;

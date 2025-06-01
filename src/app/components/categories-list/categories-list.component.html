@@ -33,12 +33,15 @@
               </td>
               <td>
                 <div class="icon-tooltip-wrapper">
-                  <button class="boton-table" [disabled]="formControls[index].invalid" (click)="save(index)"><i
-                    class="bi bi-floppy m-3"></i></button>
+                  <button class="boton-table" [disabled]="formControls[index].invalid" (click)="save(index)">
+                    <i class="bi bi-floppy m-3"></i>
+                  </button>
                   <span class="tooltip-text">Guardar</span>
                 </div>
                 <div class="icon-tooltip-wrapper">
-                  <i class="bi bi-x-circle-fill text-danger" (click)="cancel(index)"></i>
+                  <button class="boton-table">
+                    <i class="bi bi-x-circle-fill text-danger" (click)="cancel(index)"></i>
+                  </button>
                   <span class="tooltip-text">Cancelar</span>
                 </div>
               </td>
@@ -49,11 +52,15 @@
               <td>{{ category.name | titlecase }}</td>
               <td>
                 <div class="icon-tooltip-wrapper">
-                  <i class="bi bi-pencil-square m-3" style="color: blue" (click)="edit(index)"></i>
+                  <button class="boton-table">
+                    <i class="bi bi-pencil-square m-3" (click)="edit(index)"></i>
+                  </button>
                   <span class="tooltip-text">Editar</span>
                 </div>
                 <div class="icon-tooltip-wrapper">
-                  <i class="bi bi-trash-fill text-danger" (click)="delete(category)"></i>
+                  <button class="boton-table">
+                    <i class="bi bi-trash-fill text-danger" (click)="delete(category)"></i>
+                  </button>
                   <span class="tooltip-text">Eliminar</span>
                 </div>
               </td>
@@ -62,7 +69,5 @@
         }
       </tbody>
     </table>
-
   }
-
 </div>
