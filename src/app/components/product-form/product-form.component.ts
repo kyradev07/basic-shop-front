@@ -55,7 +55,7 @@ export class ProductFormComponent {
       price: +this.productForm.controls.precio.value,
       stock: +this.productForm.controls.stock.value,
       category: +this.productForm.controls.categoria.value,
-      images: this.imagesBase64.length === 0 ? null : [...this.imagesBase64]
+      images: [...this.imagesBase64]
     };
 
     this.productService.createProduct(product).subscribe({
