@@ -31,10 +31,10 @@ export class ProductFormComponent {
   imagesBase64: string[] = [];
 
   productForm = this.fb.nonNullable.group({
-    nombre: ['fdf', [Validators.required, Validators.minLength(2)]],
-    descripcion: ['fdf', [Validators.required, Validators.minLength(2)]],
-    precio: [1, [Validators.required, Validators.min(1)]],
-    stock: [0, [Validators.required, Validators.min(0)]],
+    nombre: ['', [Validators.required, Validators.minLength(2)]],
+    descripcion: ['', [Validators.required, Validators.minLength(2)]],
+    precio: ['', [Validators.required, Validators.min(1)]],
+    stock: ['', [Validators.required, Validators.min(0)]],
     categoria: ['', [Validators.required]],
     images: ['', [Validators.required]]
   });
