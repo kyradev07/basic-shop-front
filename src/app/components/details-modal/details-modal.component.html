@@ -1,0 +1,15 @@
+<dialog class="my-modal" #myModal (keydown)="onKeyDown($event)">
+  <div class="contenedor-modal">
+    <h2><b>{{ product.name | uppercase }} - {{ product.price | currency }}</b></h2>
+    <app-carousel [images]="product.images"></app-carousel>
+
+    <div class="detalles-modal">
+      <p><b>Descripción: </b>{{ product.description }}</p>
+      <p><b>Categoría: </b>{{ getCategory(product) }}</p>
+      <p><b>Stock: </b>{{ product.stock }}</p>
+    </div>
+  </div>
+  <button class="boton-table">
+    <i class="bi bi-x-lg text-danger" (click)="cancel()"> Cerrar</i>
+  </button>
+</dialog>
