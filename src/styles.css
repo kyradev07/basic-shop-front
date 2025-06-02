@@ -210,7 +210,7 @@ main {
 
 /************MODAL*****************/
 
-.modal {
+.my-modal {
   border: none;
   position: fixed;
   inset: 0;
@@ -220,7 +220,7 @@ main {
   border-radius: 0.5em;
 }
 
-.modal::backdrop {
+.my-modal::backdrop {
   background-color: hsl(0 0% 0% / 70%);
 }
 
@@ -242,7 +242,7 @@ main {
   text-align: center;
 }
 
-.modal img {
+.my-modal img {
   width: 35rem;
 }
 
@@ -251,6 +251,7 @@ main {
   flex-direction: column;
   gap: 0.3rem;
   padding: 0.2rem;
+  margin-top: 0.5rem;
 }
 
 .boton-modal {
@@ -453,7 +454,8 @@ main {
   }
 
   .grid-form {
-    display: grid;
+    display: flex;
+    flex-direction: column;
   }
 }
 
@@ -462,7 +464,7 @@ main {
     grid-template-columns: 1fr 1fr;
   }
 
-  .modal {
+  .my-modal {
     border: none;
     position: inherit;
     margin: auto;
@@ -480,7 +482,8 @@ main {
   }
 
   .grid-form {
-    display: grid;
+    display: flex;
+    flex-direction: column;
   }
 }
 
@@ -567,7 +570,7 @@ main {
     row-gap: 1rem;
   }
 
-  .modal {
+  .my-modal {
     border: none;
     position: inherit;
     margin: auto;
@@ -585,7 +588,8 @@ main {
   }
 
   .grid-form {
-    display: grid;
+    display: flex;
+    flex-direction: column;
   }
 
 
@@ -599,6 +603,7 @@ main {
   }
 
   .grid-form {
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
 }
