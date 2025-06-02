@@ -102,7 +102,7 @@ export class ProductFormComponent {
           const ctx = canvas.getContext('2d');
           if (ctx) {
             ctx.drawImage(img, 0, 0);
-            const webpBase64 = canvas.toDataURL('image/webp', 0.6);
+            const webpBase64 = canvas.toDataURL('image/webp', 0.5);
             this.imagesBase64.push(webpBase64);
           }
         };
