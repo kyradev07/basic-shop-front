@@ -16,6 +16,10 @@ export const routes: Routes = [
     component: ProductFormComponent
   },
   {
+    path: 'products/edit/:id',
+    component: ProductFormComponent
+  },
+  {
     path: 'categories',
     component: CategoriesListComponent
   },
