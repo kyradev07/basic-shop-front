@@ -94,7 +94,7 @@ export class ProductFormComponent {
     };
 
     if (this.isEditing) {
-      this.productService.updateProduct(this.productEdit.id, product).subscribe({
+      this.productService.updateProduct(this.productEdit.id!, product).subscribe({
         next: (product) => {
           this.notificationService.notificationSuccess(`Producto '${product.name}' editado exitosamente`);
           //this.reset();
