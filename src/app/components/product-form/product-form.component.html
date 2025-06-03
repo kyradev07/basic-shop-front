@@ -1,5 +1,6 @@
 <div class="container-formulario">
-  <h2 class="titulo-principal">Agregar Producto</h2>
+
+  <h2 class="titulo-principal">{{ isEditing ? 'Editar' : 'Agregar' }} Producto</h2>
 
   <div class="formulario-producto">
     <form id="form-producto" [formGroup]="productForm" (ngSubmit)="onSubmit()">
@@ -88,11 +89,10 @@
 
       </div>
 
-
       <div class="form-buttons">
         <button type="submit" id="btn-guardar"
                 [ngStyle]="{'background-color': productForm.invalid ? 'var(--clr-gray)' : '#5cb85c'}"
-                [disabled]="productForm.invalid">Guardar
+                [disabled]="productForm.invalid">{{ isEditing ? 'Editar' : 'Agregar' }}
         </button>
         <button type="button" id="btn-cancelar" (click)="reset()">Cancelar</button>
       </div>
