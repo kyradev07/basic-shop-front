@@ -4,6 +4,7 @@ import { Product } from '../../models/product.interface';
 import { DetailsModalComponent } from '../details-modal/details-modal.component';
 import { ProductService } from '../../services/product/product.service';
 import { NotificationService } from '../../services/util/notification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-info',
@@ -23,6 +24,7 @@ export class ProductInfoComponent {
   constructor(
     private readonly productsService: ProductService,
     private readonly notificationService: NotificationService,
+    private readonly router: Router,
   ) {
   }
 
@@ -45,5 +47,9 @@ export class ProductInfoComponent {
         })
       }
     });
+  }
+
+  edit(id: number) {
+    this.router.navigate(['/products/edit', id]);
   }
 }
