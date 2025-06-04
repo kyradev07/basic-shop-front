@@ -1,0 +1,30 @@
+<section class="wrapper">
+
+  <header class="header-mobile">
+    <h1 class="logo">Admin Panel</h1>
+    <button class="open-menu" id="open-menu" (click)="openMenu()">
+      <i class="bi bi-list"></i>
+    </button>
+  </header>
+
+  <aside [ngClass]="{ 'aside-visible': isOpenedMenu }">
+
+    <button class="close-menu" id="close-menu" (click)="closeMenu()">
+      <i class="bi bi-x"></i>
+    </button>
+    <header>
+      <h1 class="logo">Admin Panel</h1>
+    </header>
+
+    <app-navbar/>
+    <app-footer/>
+  </aside>
+
+  <main>
+    <router-outlet />
+  </main>
+
+</section>
+
+
+

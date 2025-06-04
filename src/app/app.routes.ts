@@ -5,39 +5,56 @@ import { CategoriesListComponent } from './components/categories-list/categories
 import { CategoryFormComponent } from './components/category-form/category-form.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
+import { LoginComponent } from './components/login/login.component';
+import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
 
 export const routes: Routes = [
   {
-    path: 'products',
-    component: ProductsListComponent
+    path: 'login',
+    component: LoginComponent
   },
   {
-    path: 'products/add',
-    component: ProductFormComponent
-  },
-  {
-    path: 'products/edit/:id',
-    component: ProductFormComponent
-  },
-  {
-    path: 'categories',
-    component: CategoriesListComponent
-  },
-  {
-    path: 'categories/add',
-    component: CategoryFormComponent
-  },
-  {
-    path: 'users',
-    component: UsersListComponent
-  },
-  {
-    path: 'users/add',
-    component: UserFormComponent
+    path: '',
+    component: MainLayoutComponent,
+    canActivate: [false],
+    children: [
+      {
+        path: 'products',
+        component: ProductsListComponent
+      },
+      {
+        path: 'products/add',
+        component: ProductFormComponent
+      },
+      {
+        path: 'products/edit/:id',
+        component: ProductFormComponent
+      },
+      {
+        path: 'categories',
+        component: CategoriesListComponent
+      },
+      {
+        path: 'categories/add',
+        component: CategoryFormComponent
+      },
+      {
+        path: 'users',
+        component: UsersListComponent
+      },
+      {
+        path: 'users/add',
+        component: UserFormComponent
+      },
+      {
+        path: '',
+        redirectTo: 'products',
+        pathMatch: 'full'
+      }
+    ]
   },
   {
     path: '**',
-    redirectTo: 'products',
-    pathMatch: 'full',
+    redirectTo: 'login',
   },
 ];
