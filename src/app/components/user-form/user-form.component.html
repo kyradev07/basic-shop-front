@@ -1,1 +1,54 @@
-<p>user-form works!</p>
+<div class="container-formulario">
+  <h2 class="titulo-principal">Agregar Usuario</h2>
+
+  <div class="formulario-producto">
+    <form id="form-producto" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Nombre Usuario</label>
+        <input type="text" id="name" formControlName="name">
+        @if (userForm.controls.name.invalid && (userForm.controls.name.touched || userForm.controls.name.dirty)) {
+          @if (userForm.controls.name.hasError('required')) {
+            <p id="error-name" class="text-error">Nombre es obligatorio</p>
+          }
+          @if (userForm.controls.name.hasError('minlength')) {
+            <p id="error-name" class="text-error">Nombre debe tener 3 o más caracteres</p>
+          }
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" id="email" formControlName="email">
+        @if (userForm.controls.email.invalid && (userForm.controls.email.touched || userForm.controls.email.dirty)) {
+          @if (userForm.controls.email.hasError('required')) {
+            <p id="error-name" class="text-error">Email es obligatorio</p>
+          }
+          @if (userForm.controls.email.hasError('email')) {
+            <p id="error-name" class="text-error">Email no es un formato válido</p>
+          }
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password">
+        @if (userForm.controls.password.invalid && (userForm.controls.password.touched || userForm.controls.password.dirty)) {
+          @if (userForm.controls.password.hasError('required')) {
+            <p id="error-name" class="text-error">Password es obligatorio</p>
+          }
+          @if (userForm.controls.password.hasError('minlength')) {
+            <p id="error-name" class="text-error">Password debe ser mínimo 6 caracteres</p>
+          }
+        }
+      </div>
+
+      <div class="form-buttons">
+        <button type="submit" id="btn-guardar" [ngStyle]="{'background-color': userForm.invalid ? 'var(--clr-gray)' : '#5cb85c'}"
+                [disabled]="userForm.invalid">Guardar
+        </button>
+        <button type="button" id="btn-cancelar" (click)="reset()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+

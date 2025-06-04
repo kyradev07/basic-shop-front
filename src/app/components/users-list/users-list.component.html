@@ -1,1 +1,192 @@
-<p>users-list works!</p>
+<h2 class="titulo-principal">Lista Usuarios</h2>
+
+<div class="container-formulario">
+
+  @if (!users.length) {
+    <h4 class="titulo-principal">Lista Vacía...</h4>
+
+  } @else {
+
+    <form [formGroup]="userForm">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th># ID</th>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Contraseña</th>
+          <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody formArrayName="users">
+        <tr *ngFor="let userGroup of users.controls; let i = index" [formGroupName]="i">
+          <td>{{ userGroup.get('id')?.value }}</td>
+          <td>
+            <ng-container *ngIf="!isEditing[i]; else editName">
+              {{ userGroup.get('name')?.value }}
+            </ng-container>
+            <ng-template #editName>
+              <input type="text" formControlName="name" />
+              <div *ngIf="userGroup.get('name')?.invalid && (userGroup.get('name')?.touched || userGroup.get('name')?.dirty)">
+                <small class="text-error" *ngIf="userGroup.get('name')?.hasError('required')">Nombre es obligatorio</small>
+                <small class="text-error" *ngIf="userGroup.get('name')?.hasError('minlength')">Nombre debe tener al menos 3 caracteres</small>
+              </div>
+            </ng-template>
+          </td>
+          <td>
+            <ng-container *ngIf="!isEditing[i]; else editEmail">
+              {{ userGroup.get('email')?.value }}
+            </ng-container>
+            <ng-template #editEmail>
+              <input type="email" formControlName="email" />
+              <div *ngIf="userGroup.get('email')?.invalid && (userGroup.get('email')?.touched || userGroup.get('email')?.dirty)">
+                <small class="text-error" *ngIf="userGroup.get('email')?.hasError('required')">Email es obligatorio</small>
+                <small class="text-error" *ngIf="userGroup.get('email')?.hasError('email')">Email no es válido</small>
+              </div>
+            </ng-template>
+          </td>
+          <td>
+            <ng-container *ngIf="!isEditing[i]; else editPassword">
+              {{ userGroup.get('password')?.value }}
+            </ng-container>
+            <ng-template #editPassword>
+              <input type="password" formControlName="password" />
+              <div *ngIf="userGroup.get('password')?.invalid && (userGroup.get('password')?.touched || userGroup.get('password')?.dirty)">
+                <small class="text-error" *ngIf="userGroup.get('password')?.hasError('required')">Contraseña es obligatoria</small>
+                <small class="text-error" *ngIf="userGroup.get('password')?.hasError('minlength')">Contraseña debe tener al menos 6 caracteres</small>
+              </div>
+            </ng-template>
+          </td>
+          <td>
+            <ng-container *ngIf="!isEditing[i]; else editActions">
+              <div class="icon-tooltip-wrapper">
+                <button class="boton-table">
+                  <i class="bi bi-pencil-square m-3" (click)="edit(i)"></i>
+                </button>
+                <span class="tooltip-text">Editar</span>
+              </div>
+              <div class="icon-tooltip-wrapper">
+                <button class="boton-table">
+                  <i class="bi bi-trash-fill text-danger" (click)="delete(i)"></i>
+                </button>
+                <span class="tooltip-text">Eliminar</span>
+              </div>
+            </ng-container>
+            <ng-template #editActions>
+              <div class="icon-tooltip-wrapper">
+                <button class="boton-table" [disabled]="userGroup.invalid" (click)="save(i)">
+                  <i class="bi bi-floppy m-3"></i>
+                </button>
+                <span class="tooltip-text">Guardar</span>
+              </div>
+              <div class="icon-tooltip-wrapper">
+                <button class="boton-table">
+                  <i class="bi bi-x-circle-fill text-danger" (click)="cancel(i)"></i>
+                </button>
+                <span class="tooltip-text">Cancelar</span>
+              </div>
+            </ng-template>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </form>
+
+
+
+<!--    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th># ID</th>
+        <th>Usuario</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (user of users; track user.id; let index = $index) {
+          @if (isEditing[index]) {
+            <tr>
+              <td>{{ user.id }}</td>
+              <form action="" [formGroup]="formControls[index].value">
+                <td>
+                  <input type="text" id="name" formControlName="name">
+                  @if (formControls[index].controls['name'].invalid && (formControls[index].controls['name'].touched || formControls[index].controls['name'].dirty)) {
+                    @if (formControls[index].controls['name'].hasError('required')) {
+                      <p id="error-name" class="text-error">Nombre es obligatorio</p>
+                    }
+                    @if (formControls[index].controls['name'].hasError('minlength')) {
+                      <p id="error-name" class="text-error">Nombre debe tener 3 o más caracteres</p>
+                    }
+                  }
+                </td>
+
+                <td>
+                  <input type="text" id="email" formControlName="email">
+                  @if (formControls[index].controls['email'].invalid && (formControls[index].controls['email'].touched || formControls[index].controls['email'].dirty)) {
+                    @if (formControls[index].controls['email'].hasError('required')) {
+                      <p id="error-name" class="text-error">Email es obligatorio</p>
+                    }
+                    @if (formControls[index].controls['email'].hasError('email')) {
+                      <p id="error-name" class="text-error">Email no es un formato válido</p>
+                    }
+                  }
+                </td>
+
+                <td>
+                  <input type="password" id="password" formControlName="password">
+                  @if (formControls[index].controls['password'].invalid && (formControls[index].controls['password'].touched || formControls[index].controls['password'].dirty)) {
+                    @if (formControls[index].controls['password'].hasError('required')) {
+                      <p id="error-name" class="text-error">Password es obligatorio</p>
+                    }
+                    @if (formControls[index].controls['password'].hasError('minlength')) {
+                      <p id="error-name" class="text-error">Password debe ser mínimo 6 caracteres</p>
+                    }
+                  }
+                </td>
+
+                <td>
+                  <div class="icon-tooltip-wrapper">
+                    <button class="boton-table" [disabled]="formControls[index].value.invalid" (click)="save(index)">
+                      <i class="bi bi-floppy m-3"></i>
+                    </button>
+                    <span class="tooltip-text">Guardar</span>
+                  </div>
+                  <div class="icon-tooltip-wrapper">
+                    <button class="boton-table">
+                      <i class="bi bi-x-circle-fill text-danger" (click)="cancel(index)"></i>
+                    </button>
+                    <span class="tooltip-text">Cancelar</span>
+                  </div>
+                </td>
+              </form>
+            </tr>
+
+          } @else {
+            <tr>
+              <td>{{ user.id }}</td>
+              <td>{{ user.name | titlecase }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.password.replaceAll('/[a-zA-Z]/g', '*') }}</td>
+              <td>
+                <div class="icon-tooltip-wrapper">
+                  <button class="boton-table">
+                    <i class="bi bi-pencil-square m-3" (click)="edit(index)"></i>
+                  </button>
+                  <span class="tooltip-text">Editar</span>
+                </div>
+                <div class="icon-tooltip-wrapper">
+                  <button class="boton-table">
+                    <i class="bi bi-trash-fill text-danger" (click)="delete(user)"></i>
+                  </button>
+                  <span class="tooltip-text">Eliminar</span>
+                </div>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>-->
+  }
+</div>

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Product } from '../../models/product.interface';
 import { CarouselComponent } from '../carousel/carousel.component';
 import { CurrencyPipe, UpperCasePipe } from '@angular/common';
