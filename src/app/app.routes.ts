@@ -19,43 +19,15 @@ export const routes: Routes = [
     component: MainLayoutComponent,
     canActivate: [authGuard],
     children: [
-      {
-        path: 'products',
-        component: ProductsListComponent
-      },
-      {
-        path: 'products/add',
-        component: ProductFormComponent
-      },
-      {
-        path: 'products/edit/:id',
-        component: ProductFormComponent
-      },
-      {
-        path: 'categories',
-        component: CategoriesListComponent
-      },
-      {
-        path: 'categories/add',
-        component: CategoryFormComponent
-      },
-      {
-        path: 'users',
-        component: UsersListComponent
-      },
-      {
-        path: 'users/add',
-        component: UserFormComponent
-      },
-      {
-        path: '',
-        redirectTo: 'products',
-        pathMatch: 'full'
-      }
+      { path: '', redirectTo: 'products', pathMatch: 'full' },
+      { path: 'products', component: ProductsListComponent },
+      { path: 'products/add', component: ProductFormComponent },
+      { path: 'products/edit/:id', component: ProductFormComponent },
+      { path: 'categories', component: CategoriesListComponent },
+      { path: 'categories/add', component: CategoryFormComponent },
+      { path: 'users', component: UsersListComponent },
+      { path: 'users/add', component: UserFormComponent },
+      { path: '**', redirectTo: 'products' }
     ]
-  },
-  {
-    path: '**',
-    redirectTo: 'products',
-  },
+  }
 ];
