@@ -3,12 +3,12 @@
     <h5>Product</h5>
     <hr>
     <li>
-      <a class="boton-menu boton-carrito" [routerLink]="'/products'" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a class="boton-menu" [routerLink]="'/products'" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         <i class="bi bi-list-ul"></i> See All
       </a>
     </li>
     <li>
-      <a class="boton-menu boton-categoria" [routerLink]="'/products/add'" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a class="boton-menu" [routerLink]="'/products/add'" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         <i class="bi bi-plus-square"></i> Add
       </a>
     </li>
@@ -16,12 +16,12 @@
     <h5>Category</h5>
     <hr>
     <li>
-      <a class="boton-menu boton-carrito" [routerLink]="'/categories'" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a class="boton-menu" [routerLink]="'/categories'" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         <i class="bi bi-list-ul"></i> See All
       </a>
     </li>
     <li>
-      <a class="boton-menu boton-categoria" [routerLink]="'/categories/add'" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a class="boton-menu" [routerLink]="'/categories/add'" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         <i class="bi bi-plus-square"></i> Add
       </a>
     </li>
@@ -29,13 +29,20 @@
     <h5>User</h5>
     <hr>
     <li>
-      <a class="boton-menu boton-carrito" [routerLink]="'/users'" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a class="boton-menu" [routerLink]="'/users'" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         <i class="bi bi-list-ul"></i> See All
       </a>
     </li>
     <li>
-      <a class="boton-menu boton-categoria" [routerLink]="'/users/add'" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a class="boton-menu" [routerLink]="'/users/add'" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         <i class="bi bi-plus-square"></i> Add
+      </a>
+    </li>
+    <hr>
+    <h4>Logout</h4>
+    <li>
+      <a class="boton-menu" (click)="logout()">
+        <i class="bi bi-box-arrow-left"></i> Exit
       </a>
     </li>
   </ul>
