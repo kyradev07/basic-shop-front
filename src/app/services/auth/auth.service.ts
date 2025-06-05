@@ -8,8 +8,6 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private authenticated: boolean = false;
-
   constructor(
     private readonly userService: UserService,
     private readonly router: Router,
