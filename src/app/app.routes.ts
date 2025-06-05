@@ -7,6 +7,7 @@ import { UserFormComponent } from './components/user-form/user-form.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { LoginComponent } from './components/login/login.component';
 import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -16,7 +17,7 @@ export const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
-    canActivate: [false],
+    canActivate: [authGuard],
     children: [
       {
         path: 'products',
@@ -55,6 +56,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'login',
+    redirectTo: 'products',
   },
 ];
