@@ -14,7 +14,6 @@ export class UserService {
   }
 
   createUser(user: User): Observable<User> {
-    user.password = btoa(user.password);
     return this.http.post<User>(this.url, user);
   }
 
