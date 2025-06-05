@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserService } from '../user/user.service';
 import { catchError, map, Observable, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,23 +11,25 @@ export class AuthService {
   private authenticated: boolean = false;
 
   constructor(
-    private readonly userService: UserService
+    private readonly userService: UserService,
+    private readonly router: Router,
   ) {
   }
 
   login(email: string, password: string): Observable<boolean> {
     return this.userService.findByEmail(email).pipe(
-      map(user => password === atob(user.password)),
+      map(user => {
+        return password === user.password
+      }),
       tap((isValidPassword: boolean) => {
         if (isValidPassword) {
-          this.authenticated = true;
+          sessionStorage.setItem('mock_token', isValidPassword.toString());
         } else {
           throw new Error('', { cause: 404 });
         }
       }),
       catchError((err) => {
         if (err?.status === 404 || err.cause === 404) {
-          this.authenticated = false;
           throw new Error('Credenciales incorrectas');
         }
         throw err;
@@ -35,6 +38,11 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return this.authenticated;
+    return !!sessionStorage.getItem('mock_token');
+  }
+
+  logout(): void {
+    sessionStorage.removeItem('mock_token');
+    this.router.navigate(['/login']).then();
   }
 }
