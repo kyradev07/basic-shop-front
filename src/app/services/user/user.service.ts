@@ -14,6 +14,7 @@ export class UserService {
   }
 
   createUser(user: User): Observable<User> {
+    user.password = btoa(user.password);
     return this.http.post<User>(this.url, user);
   }
 
@@ -27,5 +28,9 @@ export class UserService {
 
   updateUser(id: number, User: User): Observable<User> {
     return this.http.patch<User>(`${this.url}/${id}`, User);
+  }
+
+  findByEmail(email: string): Observable<User> {
+    return this.http.get<User>(`${this.url}/login/${email}`);
   }
 }
