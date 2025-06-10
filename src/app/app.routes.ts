@@ -27,7 +27,11 @@ export const routes: Routes = [
       { path: 'categories/add', component: CategoryFormComponent },
       { path: 'users', component: UsersListComponent },
       { path: 'users/add', component: UserFormComponent },
-      { path: '**', redirectTo: 'products' }
+      { path: '**', redirectTo: 'products' },
     ]
+  },
+  {
+    path: '**',
+    redirectTo: 'login'
   }
 ];
